@@ -58,10 +58,13 @@ func MD(i interface{}) RedactorFunc {
 		return func() Redactor {
 			return Metadata(v)
 		}
+	case Set:
+		return func() Redactor {
+			return MD(v.ToArray())
+		}
 	case fmt.Stringer:
 		return func() Redactor {
 			return Metadata(v.String())
-
 		}
 	case []byte:
 		return func() Redactor {

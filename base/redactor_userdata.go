@@ -56,6 +56,10 @@ func UD(i interface{}) RedactorFunc {
 		return func() Redactor {
 			return UserData(v)
 		}
+	case Set:
+		return func() Redactor {
+			return UD(v.ToArray())
+		}
 	case fmt.Stringer:
 		return func() Redactor {
 			return UserData(v.String())

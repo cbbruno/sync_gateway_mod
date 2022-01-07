@@ -86,6 +86,14 @@ func buildRedactorFuncSlice(valueOf reflect.Value, function func(interface{}) Re
 	return retVal
 }
 
+func (set Set) buildRedactor(function func(interface{}) RedactorFunc) RedactorSlice {
+	tmp := []Redactor{}
+	for k := range set {
+		tmp = append(tmp, function(k))
+	}
+	return tmp
+}
+
 type RedactionLevel int
 
 const DefaultRedactionLevel = RedactPartial

@@ -60,7 +60,7 @@ func MD(i interface{}) RedactorFunc {
 		}
 	case Set:
 		return func() Redactor {
-			return MD(v.ToArray())
+			return v.buildRedactor(MD)
 		}
 	case fmt.Stringer:
 		return func() Redactor {
